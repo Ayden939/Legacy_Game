@@ -1,11 +1,11 @@
-class skeleton:
+class Skeleton:
 
     def __init__(self):
         self.health = 100
         self.strength = 15
 
-    def attack(self):
-        character.incoming_damage(self.strength)
+    def attack(self, target):
+        target.incoming_damage(self.strength)
     
     def incoming_damage(self, damage):
         self.health = self.health - damage
