@@ -9,7 +9,7 @@ class Skeleton:
     
     def incoming_damage(self, damage):
         self.health = self.health - damage
-        if(health < 0):
-            health = 0
+        if(self.health < 0):
+            self.health = 0
     
     
