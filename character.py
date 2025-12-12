@@ -1,3 +1,5 @@
+import random
+
 class  Character:
 
 
@@ -17,8 +19,9 @@ class  Character:
     
 
     def attack(self, target):
-        print(f"{self.name} attacks skeleton for {self.strength} damage!")
-        target.incoming_damage(self.strength)
+        strike = self.strength + random.randint(1,5)
+        print(f"{self.name} attacks skeleton for {strike} damage!")
+        target.incoming_damage(strike)
 
     def heal(self, amount):
         self.health = self.health + amount

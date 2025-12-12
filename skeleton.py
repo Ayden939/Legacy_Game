@@ -1,3 +1,5 @@
+import random
+
 class Skeleton:
 
     def __init__(self):
@@ -5,8 +7,9 @@ class Skeleton:
         self.strength = 15
 
     def attack(self, target):
-        print(f"Skeleton attacks {target.name} for {self.strength} damage!")
-        target.incoming_damage(self.strength)
+        strike = self.strength + random.randint(1,10)
+        print(f"Skeleton attacks {target.name} for {strike} damage!")
+        target.incoming_damage(strike)
     
     def incoming_damage(self, damage):
         print(f"Skeleton takes {damage} damage!")
