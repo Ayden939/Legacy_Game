@@ -7,7 +7,7 @@ class Skeleton:
         self.strength = 15
 
     def attack(self, target):
-        strike = self.strength + random.randint(1,10)
+        strike = self.strength + random.randint(5,20)
         print(f"Skeleton attacks {target.name} for {strike} damage!")
         target.incoming_damage(strike)
     
