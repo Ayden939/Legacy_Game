@@ -25,3 +25,5 @@ class  Character:
 
     def heal(self, amount):
         self.health = self.health + amount
+        damage = random.choice([0,15])
+        self.incoming_damage(damage)

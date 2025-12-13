@@ -14,3 +14,5 @@ cur.execute("""CREATE TABLE IF NOT EXISTS game_log(
     )""")
 
 con.commit()
+
+con.close()
