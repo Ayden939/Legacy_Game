@@ -1,0 +1,16 @@
+import sqlite3
+
+con = sqlite3.connect("gamelogs.db")
+
+cur = con.cursor()
+
+cur.execute("""CREATE TABLE IF NOT EXISTS game_log(
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    character_name TEXT,
+    generation INTEGER, 
+    action TEXT, 
+    value INTEGER, 
+    floor INTEGER
+    )""")
+
+con.commit()
