@@ -15,7 +15,7 @@ while hero.health > 0 and enemy.health > 0:
 
     floor = floor + 1
 
-    print(f"Floor:s {floor}")
+    print(f"Floor: {floor}")
 
     choice =  input("Please choose attack, retreat, or heal:    ")
     if(choice == "attack"):
