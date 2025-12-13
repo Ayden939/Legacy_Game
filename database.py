@@ -15,4 +15,15 @@ cur.execute("""CREATE TABLE IF NOT EXISTS game_log(
 
 con.commit()
 
+def log(character_name, generation, action, value, floor):
+    cur.execute("""
+    INSERT INTO game_log(
+    character_name,
+    generation,
+    action,
+    value,
+    floor)
+    )
+    VALUES(?,?,?,?,?)
+    """, (character_name, generation, action, value, floor)
 con.close()
