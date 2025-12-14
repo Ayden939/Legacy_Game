@@ -18,12 +18,13 @@ con.commit()
 def log(character_name, generation, action, value, floor):
     cur.execute("""
     INSERT INTO game_log(
-    character_name,
-    generation,
-    action,
-    value,
-    floor)
+        character_name,
+        generation,
+        action,
+        value,
+        floor
     )
-    VALUES(?,?,?,?,?)
-    """, (character_name, generation, action, value, floor)
-con.close()
+    VALUES (?,?,?,?,?)
+    """, (character_name, generation, action, value, floor))
+    con.commit()
+    con.close()
