@@ -3,7 +3,7 @@ import random
 class Skeleton:
 
     def __init__(self):
-        self.health = 100
+        self.health = 1
         self.strength = 15
 
     def attack(self, target):

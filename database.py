@@ -27,4 +27,4 @@ def log(character_name, generation, action, value, floor):
     VALUES (?,?,?,?,?)
     """, (character_name, generation, action, value, floor))
     con.commit()
-    con.close()
+    #con.close()
