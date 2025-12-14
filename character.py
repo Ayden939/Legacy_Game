@@ -23,7 +23,19 @@ class  Character:
         print(f"{self.name} attacks skeleton for {strike} damage!")
         target.incoming_damage(strike)
 
-    def heal(self, amount):
-        self.health = self.health + amount
-        damage = random.choice([0,15])
-        self.incoming_damage(damage)
+    def heal(self):
+        if self.health < 100:
+            amount = random.choice([5,10,15,20])
+            if self.health + amount < 100:
+                self.health = self.health + amount
+                print(f"{self.name} gains {amount} health!")
+                damage = random.choice([0, 10, 15])
+                self.incoming_damage(damage)
+            else:
+                difference = 100 - self.health
+                self.health = 100
+                print(f"{self.name} gains {difference} health!")
+                damage = random.choice([0, 10, 15])
+                self.incoming_damage(damage)
+        else:
+            print(f"{self.name}'s health is already full!")

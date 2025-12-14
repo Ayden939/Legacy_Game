@@ -1,4 +1,3 @@
-# Plan later to possibly make this a game object, research it
 
 from character import Character
 from skeleton import Skeleton
@@ -36,7 +35,7 @@ while hero.health > 0 and enemy.health > 0:
         break
 
     elif(choice == "heal"):
-        hero.heal(5)
+        hero.heal()
         print(f"Hero hp: {hero.health}")
     
     else:
