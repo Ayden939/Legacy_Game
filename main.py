@@ -18,18 +18,18 @@ while floor < 10 and not retreat:
     floor = floor + 1
     print(f"Floor: {floor}")
     enemy = Skeleton()
+    print(f"A {enemy.name} blocks Lady Samantha's path.")
 
     while hero.health > 0 and enemy.health > 0:
-
         choice =  input("Please choose attack, retreat, or heal:    ")
         if(choice == "attack"):
             hero.attack(enemy)
-            print(f"Enemy hp: {enemy.health}")
             if(enemy.health <= 0):
                 print("Enemy defeated!")
                 log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
                 break
             enemy.attack(hero)
+            print(f"Enemy hp: {enemy.health}")
             print(f"Hero hp: {hero.health}")
             if(hero.health <= 0):
                 print("Defeated")
@@ -47,7 +47,8 @@ while floor < 10 and not retreat:
         else:
             print("You must attack, retreat, or heal:   ")
     
-        
+    if(hero.health <= 0):
+        break
 
 print("Congrats you win great job!")
 
