@@ -1,6 +1,6 @@
 
 from character import Character
-from skeleton import Skeleton
+from enemy import Skeleton
 from database import log
 import database
 
