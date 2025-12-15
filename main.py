@@ -1,9 +1,10 @@
 
 from character import Character
-from enemy import Skeleton, Goblin
+from enemy import Skeleton, Goblin, Phantom
 from database import log
 import database
 import random
+
 
 hero = Character("Lady Samantha Rostnovak", 1)
 floor = 0
@@ -17,7 +18,7 @@ and none have gone very far. There are a hundreed floors, and a long adventure f
 while floor < 10 and not retreat:
     floor = floor + 1
     print(f"Floor: {floor}")
-    enemy = random.choice([Skeleton(), Goblin()])
+    enemy = random.choice([Skeleton(), Goblin(), Phantom()])
     print(f"A {enemy.name} blocks Lady Samantha's path.")
 
     while hero.health > 0 and enemy.health > 0:
@@ -31,6 +32,7 @@ while floor < 10 and not retreat:
             enemy.attack(hero)
             print(f"Enemy hp: {enemy.health}")
             print(f"Hero hp: {hero.health}")
+
             if(hero.health <= 0):
                 print("Defeated")
                 break
