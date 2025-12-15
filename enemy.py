@@ -29,3 +29,9 @@ class Skeleton(Enemy):
 
     def __init__(self):
         super().__init__("Skeleton", 15, 100)
+
+
+class Goblin(Enemy):
+
+    def __init__(self):
+        super().__init__("Goblin", 20, 90)
