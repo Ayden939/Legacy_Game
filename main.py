@@ -6,17 +6,18 @@ import database
 
 
 hero = Character("Lady Samantha Rostnovak", 1)
-enemy = Skeleton()
 floor = 0
+retreat = False
 
 print("""The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except
 that it has been around long before any person had settled there. Many have dove in to explore the depths, but most have fallen,
 and none have gone very far. There are a hundreed floors, and a long adventure for our courageous hero.""")
 
 
-while floor < 10:
+while floor < 10 and not retreat:
     floor = floor + 1
     print(f"Floor: {floor}")
+    enemy = Skeleton()
 
     while hero.health > 0 and enemy.health > 0:
 
@@ -35,7 +36,8 @@ while floor < 10:
                 break
             
         elif(choice == "retreat"):
-            print(f"{hero.name} has left the dungeon")
+            print(f"Lady Samantha Rostnovak has left the dungeon")
+            retreat = True
             break
 
         elif(choice == "heal"):
@@ -45,7 +47,6 @@ while floor < 10:
         else:
             print("You must attack, retreat, or heal:   ")
     
-    enemy.health = 1
         
 
 print("Congrats you win great job!")
