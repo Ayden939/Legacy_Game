@@ -1,3 +1,9 @@
+"""
+Defines all enemy types and behavior.
+Enemies ineherit from the parent enemy class.
+"""
+
+
 import random
 
 class Enemy:

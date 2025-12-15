@@ -1,3 +1,9 @@
+"""
+Defines main player character and actions.
+Will be expanded to help manage character generations and inventory
+"""
+
+
 import random
 
 class  Character:

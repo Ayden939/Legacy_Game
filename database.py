@@ -1,3 +1,9 @@
+"""
+Handles database connection and logging game events to the database.
+Creates necessary tables and connections.
+"""
+
+
 import sqlite3
 
 con = sqlite3.connect("gamelogs.db")
@@ -27,4 +33,3 @@ def log(character_name, generation, action, value, floor):
     VALUES (?,?,?,?,?)
     """, (character_name, generation, action, value, floor))
     con.commit()
-    #con.close()
