@@ -9,15 +9,18 @@ import random
 class  Character:
 
 
-    def __init__(self, name, generation):
+    def __init__(self, name, generation, weapon = None, armor = None):
         self.name = name
         self.floor = 1
         self.health = 100
         self.strength = 20
         self.generation = generation
+        self.weapon = weapon
+        self.armor = armor
     
 
     def incoming_damage(self, damage):
+        damage = damage - self.armor
         print(f"{self.name} takes {damage} damage!")
         self.health = self.health - damage
         if self.health < 0:
@@ -25,7 +28,13 @@ class  Character:
     
 
     def attack(self, target):
-        strike = self.strength + random.randint(1,5)
+
+        if(self.weapon):
+            weapon_attack = self.weapon.attack
+        else:
+            weapon_attack = 0
+
+        strike = self.strength + random.randint(1,5) + weapon_attack
         print(f"{self.name} attacks skeleton for {strike} damage!")
         target.incoming_damage(strike)
 

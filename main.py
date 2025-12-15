@@ -4,11 +4,14 @@ from enemy import Skeleton, Goblin, Phantom
 from database import log
 import database
 import random
+from equipment import Sword, Shield
 
 
 hero = Character("Lady Samantha Rostnovak", 1)
 floor = 0
 retreat = False
+hero.weapon = Sword()
+print(hero.weapon.name)
 
 print("""The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except
 that it has been around long before any person had settled there. Many have dove in to explore the depths, but most have fallen,
