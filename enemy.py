@@ -7,10 +7,11 @@ Enemies ineherit from the parent enemy class.
 import random
 
 class Enemy:
-    def __init__(self, name, strength, health):
+    def __init__(self, name, strength, health, rarity):
         self.name = name
         self.strength = strength
         self.health = health
+        self.rarity = rarity
 
     def attack(self, target):
         strike = self.strength + random.randint(5,20)
@@ -28,19 +29,19 @@ class Enemy:
 class Skeleton(Enemy):
 
     def __init__(self):
-        super().__init__("Skeleton", 15, 100)
+        super().__init__("Skeleton", 15, 100, "common")
 
 
 class Goblin(Enemy):
 
     def __init__(self):
-        super().__init__("Goblin", 20, 90)
+        super().__init__("Goblin", 20, 90, "common")
 
 
 class Phantom(Enemy):
 
     def __init__(self):
-        super().__init__("Phantom", 5, 150)
+        super().__init__("Phantom", 5, 150, "rare")
 
     def attack(self, target):
         strike = self.strength + random.randint(5,20)

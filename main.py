@@ -5,7 +5,7 @@ from database import log
 import database
 import random
 from equipment import Sword, Shield
-
+from loot import loot_drop
 
 hero = Character("Lady Samantha Rostnovak", 1)
 floor = 0
@@ -28,6 +28,7 @@ while floor < 10 and not retreat:
             hero.attack(enemy)
             if(enemy.health <= 0):
                 print("Enemy defeated!")
+                loot_drop(enemy.rarity, hero)
                 log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
                 break
             enemy.attack(hero)
