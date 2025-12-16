@@ -28,7 +28,9 @@ while floor < 10 and not retreat:
             hero.attack(enemy)
             if(enemy.health <= 0):
                 print("Enemy defeated!")
-                loot_drop(enemy.rarity, hero)
+                item = loot_drop(enemy.rarity, hero)
+                if item:
+                    hero.equip(item, enemy)
                 log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
                 break
             enemy.attack(hero)
@@ -47,6 +49,7 @@ while floor < 10 and not retreat:
         elif(choice == "heal"):
             hero.heal()
             print(f"Hero hp: {hero.health}")
+            print(f"Enemy hp: {enemy.health}")
         
         else:
             print("You must attack, retreat, or heal:   ")

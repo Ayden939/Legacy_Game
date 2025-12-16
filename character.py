@@ -23,7 +23,7 @@ class  Character:
 
         if(self.armor):
             if(damage - self.armor.defense > 0):
-                damage = damage - self.armor
+                damage = damage - self.armor.defense
             else:
                 damage = 0
 
@@ -41,7 +41,7 @@ class  Character:
             weapon_attack = 0
 
         strike = self.strength + random.randint(1,5) + weapon_attack
-        print(f"{self.name} attacks skeleton for {strike} damage!")
+        print(f"{self.name} attacks {target.name} for {strike} damage!")
         target.incoming_damage(strike)
 
     def heal(self):
@@ -60,3 +60,24 @@ class  Character:
                 self.incoming_damage(damage)
         else:
             print(f"{self.name}'s health is already full!")
+
+
+    def equip(self, equipment, enemy):
+        print(f"{enemy.name} has dropped {equipment.name}")
+        choice = ""
+
+        while choice != "yes" and choice != "no":
+            choice = input("Would you like to equip? ").strip().lower()
+            if(choice == "yes"):
+                if(equipment.type == "weapon"):
+                    self.weapon = equipment
+                else:
+                    self.armor = equipment
+
+                print(f"{self.name} equipped {equipment.name}!")
+
+
+            elif(choice == "no"):
+                print(f"{self.name} continues on...")
+            else:
+                print(f"Please enter yes or no: ")
