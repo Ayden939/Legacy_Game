@@ -20,7 +20,13 @@ class  Character:
     
 
     def incoming_damage(self, damage):
-        damage = damage - self.armor
+
+        if(self.armor):
+            if(damage - self.armor.defense > 0):
+                damage = damage - self.armor
+            else:
+                damage = 0
+
         print(f"{self.name} takes {damage} damage!")
         self.health = self.health - damage
         if self.health < 0:
