@@ -5,6 +5,8 @@ Features (Current):
 10 floor gameplay
 Simple data log for when enemy is defeated
 Varied attack amounts and heal risk factor
+Equippable equipment that add bonuses to the character
+Enemy loot drop
 
 How To Play:
 1. Download project contents, open in code editor of your choice
