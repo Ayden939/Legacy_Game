@@ -57,6 +57,8 @@ while floor < 10 and not retreat:
     if(hero.health <= 0):
         break
 
-print("Congrats you win great job!")
+
+if(floor > 10):
+    print(f"{hero.name} has beat the dungeon!")
 
 database.con.close()
