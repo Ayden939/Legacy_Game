@@ -6,7 +6,7 @@ Label will display text/images
 root is where tkinter places it
 .pack(), .grid(), .place() actually places it
 
-""""
+"""
 
 import tkinter as tk
 from character import Character
@@ -19,8 +19,9 @@ from loot import loot_drop
 
 # Game objects
 hero = Character("Lady Samantha Rostnovak", 1)
-floor = 0
+floor = 1
 retreat = False
+enemy = random.choice([Skeleton(), Goblin(), Phantom()])
 
 # Tkinter GUI setup
 root = tk.Tk()      # This creates the window, and root.title just applies the title to it
@@ -29,23 +30,25 @@ root.title("Legacy Game")
 
 
 # Info Labels
-floor_label = tk.label(root, text=f"Floor: {floor}")
+floor_label = tk.Label(root, text=f"Floor: {floor}")
 floor_label.pack()
 
-hero_label = tk.label(root, text=f"{hero.name} HP: {hero.health}")
+hero_label = tk.Label(root, text=f"{hero.name} HP: {hero.health}")
 hero_label.pack()
 
-enemy_label = tk.label(root, text=f"{enemy.name} Enemy HP: {enemy.health}")
+enemy_label = tk.Label(root, text=f"{enemy.name} Enemy HP: {enemy.health}")
 enemy_label.pack()
 
-output_label = tk.label(root, text = "")
+output_label = tk.Label(root, text = "")
 output_label.pack()
 
 
+output_label.config(text = "The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except\n"
+"that it has been around long before any person had settled there. Many have dove in to explore the depths, but most have fallen,\n"
+"and none have gone very far. There are a hundreed floors, and a long adventure for our courageous hero.")
 
 def attack():
     damage = hero.attack(enemy)
-    update_labels(f"{hero.name} attacks {enemy.name} for {damage} damage!")
     if(enemy.health <= 0):
         update_labels("Enemy defeated!")
         #item = loot_drop(enemy.rarity, hero)
@@ -55,54 +58,59 @@ def attack():
         new_floor()
         return
     enemy.attack(hero)
-    update_labels(f"{hero.name} HP: {hero.health}\n{enemy.name} HP: {enemy.health}")
+    update_labels(f"{hero.name} attacks {enemy.name} for {damage} damage!\n"
+    f"{hero.name} HP: {hero.health}\n{enemy.name} HP: {enemy.health}")
 
     if(hero.health <= 0):
         update_labels("Defeated")
         disable_buttons()
+        return
 
     
 def heal():
     healed, damage = hero.heal()
-    update_labels(f"Hero gained {healed} health and was attacked for {damage} damage!")
-    update_labels(f"Hero hp: {hero.health}")
-    update_labels(f"Enemy hp: {enemy.health}")
+    if(hero.health > 0):
+        update_labels(
+            f"Hero gained {healed} health and was attacked for {damage} damage!\n"
+            f"Hero HP: {hero.health}\n"
+            f"Enemy HP: {enemy.health}"
+        )
+    else:
+        update_labels(f"Hero gained {healed} but took {damage} damage and was defeated!")
+        disable_buttons()
+        return
 
 def retreat():
     update_labels(f"{hero.name} has left the dungeon")
     disable_buttons()
+    return 
 
+def update_labels(text):
+    hero_label.config(text = f"{hero.name} HP: {hero.health}")
+    enemy_label.config(text = f"{enemy.name} HP: {enemy.health}")
+    output_label.config(text = text)
 
-print("""The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except
-that it has been around long before any person had settled there. Many have dove in to explore the depths, but most have fallen,
-and none have gone very far. There are a hundreed floors, and a long adventure for our courageous hero.""")
+def disable_buttons():
+    attack_btn.config(state = "disabled")
+    heal_btn.config(state = "disabled")
+    retreat_btn.config(state = "disabled")
 
-
-while floor < 10 and not retreat:
+def new_floor():
+    global floor, enemy
     floor = floor + 1
-    print(f"Floor: {floor}")
+    floor_label.config(text = f"Floor: {floor}")
     enemy = random.choice([Skeleton(), Goblin(), Phantom()])
-    print(f"A {enemy.name} blocks Lady Samantha's path.")
-
-    while hero.health > 0 and enemy.health > 0:
-        choice =  input("Please choose attack, retreat, or heal:    ")
-        if(choice == "attack"):
-
-            
-        elif(choice == "retreat"):
-            print(f"Lady Samantha Rostnovak has left the dungeon")
-            retreat = True
-            break
-
-        
-        else:
-            print("You must attack, retreat, or heal:   ")
-    
-    if(hero.health <= 0):
-        break
+    update_labels(f"A {enemy.name} appears!")
 
 
-if(floor > 10):
-    print(f"{hero.name} has beat the dungeon!")
+attack_btn = tk.Button(root, text = "Attack", command = attack)
+attack_btn.pack()
+heal_btn = tk.Button(root, text = "Heal", command = heal)
+heal_btn.pack()
+retreat_btn = tk.Button(root, text = "Retreat", command = retreat)
+retreat_btn.pack()
+
+root.mainloop()
+
 
 database.con.close()
