@@ -68,7 +68,11 @@ def attack():
 
     
 def heal():
-    healed, damage = hero.heal()
+    result = hero.heal()
+    if result is None:
+        update_labels(f"Health is full! Nothing happens.")
+        return
+    healed, damage = result
     if(hero.health > 0):
         update_labels(
             f"Hero gained {healed} health and was attacked for {damage} damage!\n"

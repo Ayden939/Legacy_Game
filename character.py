@@ -27,11 +27,12 @@ class  Character:
             else:
                 damage = 0
 
-        print(f"{self.name} takes {damage} damage!")
+        #print(f"{self.name} takes {damage} damage!")
         self.health = self.health - damage
         if self.health < 0:
             self.health = 0
-    
+
+        return damage
 
     def attack(self, target):
 
@@ -43,23 +44,26 @@ class  Character:
         strike = self.strength + random.randint(1,5) + weapon_attack
         print(f"{self.name} attacks {target.name} for {strike} damage!")
         target.incoming_damage(strike)
+        return strike
 
     def heal(self):
         if self.health < 100:
             amount = random.choice([5,10,15,20])
             if self.health + amount < 100:
                 self.health = self.health + amount
-                print(f"{self.name} gains {amount} health!")
+                #print(f"{self.name} gains {amount} health!")
                 damage = random.choice([0, 10, 15])
-                self.incoming_damage(damage)
+                damage = self.incoming_damage(damage)
+                return amount, damage
             else:
                 difference = 100 - self.health
                 self.health = 100
-                print(f"{self.name} gains {difference} health!")
+                #print(f"{self.name} gains {difference} health!")
                 damage = random.choice([0, 10, 15])
-                self.incoming_damage(damage)
+                damage = self.incoming_damage(damage)
+                return difference, damage
         else:
-            print(f"{self.name}'s health is already full!")
+            return None
 
 
     def equip(self, equipment, enemy):
