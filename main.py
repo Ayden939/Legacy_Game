@@ -53,10 +53,12 @@ def attack():
         update_labels("Enemy defeated!")
         item = loot_drop(enemy.rarity, hero)
         if item:
+            disable_buttons()
             equip_items(item, enemy)
-            return
+        else:
+            new_floor()
+        return
         log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
-        new_floor()
         return
     enemy.attack(hero)
     update_labels(f"{hero.name} attacks {enemy.name} for {damage} damage!\n"
@@ -118,18 +120,23 @@ def equip_items(equipment, enemy):
         hero.equip(equipment)
         output_label.config(text = f"{hero.name} equipped {equipment.name}")
         equip_screen.pack_forget()
-        show_actions()
+        new_floor()
+        enable_actions()
 
     def no():
         output_label.config(text = f"{hero.name} continues on...")
         equip_screen.pack_forget()
-        show_actions()
+        new_floor()
+        enable_actions()
 
     yes_btn.config(command=yes)
     no_btn.config(command=no)
     equip_screen.pack()
 
-def show_actions():
+def enable_actions():
+    attack_btn.config(state="normal")
+    heal_btn.config(state="normal")
+    retreat_btn.config(state="normal")
     attack_btn.pack()
     heal_btn.pack()
     retreat_btn.pack()
