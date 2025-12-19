@@ -51,9 +51,10 @@ def attack():
     damage = hero.attack(enemy)
     if(enemy.health <= 0):
         update_labels("Enemy defeated!")
-        #item = loot_drop(enemy.rarity, hero)
-        #if item:
-        #    hero.equip(item, enemy)
+        item = loot_drop(enemy.rarity, hero)
+        if item:
+            equip_items(item, enemy)
+            return
         log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
         new_floor()
         return
@@ -106,6 +107,32 @@ def new_floor():
     enemy = random.choice([Skeleton(), Goblin(), Phantom()])
     update_labels(f"A {enemy.name} appears!")
 
+def equip_items(equipment, enemy):
+    attack_btn.pack_forget()
+    heal_btn.pack_forget()
+    retreat_btn.pack_forget()
+
+    output_label.config(text = f"{enemy.name} has dropped {equipment.name}! Would you like to equip?")
+
+    def yes():
+        hero.equip(equipment)
+        output_label.config(text = f"{hero.name} equipped {equipment.name}")
+        equip_screen.pack_forget()
+        show_actions()
+
+    def no():
+        output_label.config(text = f"{hero.name} continues on...")
+        equip_screen.pack_forget()
+        show_actions()
+
+    yes_btn.config(command=yes)
+    no_btn.config(command=no)
+    equip_screen.pack()
+
+def show_actions():
+    attack_btn.pack()
+    heal_btn.pack()
+    retreat_btn.pack()
 
 attack_btn = tk.Button(root, text = "Attack", command = attack)
 attack_btn.pack()
@@ -113,6 +140,14 @@ heal_btn = tk.Button(root, text = "Heal", command = heal)
 heal_btn.pack()
 retreat_btn = tk.Button(root, text = "Retreat", command = retreat)
 retreat_btn.pack()
+
+# This will create a pop-up for equipping items
+equip_screen = tk.Frame(root)
+yes_btn = tk.Button(equip_screen, text = "Yes")
+yes_btn.pack(side="left")
+no_btn = tk.Button(equip_screen, text = "N0")
+no_btn.pack(side="right")
+equip_screen.pack_forget()
 
 root.mainloop()
 

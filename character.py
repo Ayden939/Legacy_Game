@@ -66,22 +66,8 @@ class  Character:
             return None
 
 
-    def equip(self, equipment, enemy):
-        print(f"{enemy.name} has dropped {equipment.name}")
-        choice = ""
-
-        while choice != "yes" and choice != "no":
-            choice = input("Would you like to equip? ").strip().lower()
-            if(choice == "yes"):
-                if(equipment.type == "weapon"):
-                    self.weapon = equipment
-                else:
-                    self.armor = equipment
-
-                print(f"{self.name} equipped {equipment.name}!")
-
-
-            elif(choice == "no"):
-                print(f"{self.name} continues on...")
-            else:
-                print(f"Please enter yes or no: ")
+    def equip(self, equipment):
+        if(equipment.type == "weapon"):
+            self.weapon = equipment
+        else:
+            self.armor = equipment
