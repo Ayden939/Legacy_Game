@@ -26,6 +26,7 @@ enemy = random.choice([Skeleton(), Goblin(), Phantom()])
 # Tkinter GUI setup
 root = tk.Tk()      # This creates the window, and root.title just applies the title to it
 root.title("Legacy Game")
+root.geometry("500x300")
 
 
 
@@ -61,8 +62,7 @@ def attack():
         log("Lady Samantha Rostnovak", hero.generation, "Killed Enemy", 0, floor)
         return
     enemy.attack(hero)
-    update_labels(f"{hero.name} attacks {enemy.name} for {damage} damage!\n"
-    f"{hero.name} HP: {hero.health}\n{enemy.name} HP: {enemy.health}")
+    update_labels(f"{hero.name} attacks {enemy.name} for {damage} damage!")
 
     if(hero.health <= 0):
         update_labels("Defeated")
@@ -77,11 +77,7 @@ def heal():
         return
     healed, damage = result
     if(hero.health > 0):
-        update_labels(
-            f"Hero gained {healed} health and was attacked for {damage} damage!\n"
-            f"Hero HP: {hero.health}\n"
-            f"Enemy HP: {enemy.health}"
-        )
+        update_labels(f"Hero gained {healed} health and was attacked for {damage} damage!\n")
     else:
         update_labels(f"Hero gained {healed} but took {damage} damage and was defeated!")
         disable_buttons()
