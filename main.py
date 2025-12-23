@@ -161,10 +161,10 @@ attack_btn = tk.Button(root, text = "Attack", command = attack)
 canvas.create_window(50, 220, anchor="nw", window=attack_btn)
 
 heal_btn = tk.Button(root, text = "Heal", command = heal)
-canvas.create_window(50, 240, anchor="nw", window=heal_btn)
+canvas.create_window(50, 260, anchor="nw", window=heal_btn)
 
 retreat_btn = tk.Button(root, text = "Retreat", command = retreat)
-canvas.create_window(50, 260, anchor="nw", window=retreat_btn)
+canvas.create_window(50, 300, anchor="nw", window=retreat_btn)
 
 # This will create a pop-up for equipping items
 equip_screen = tk.Frame(root)
