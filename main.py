@@ -29,19 +29,18 @@ root.title("Legacy Game")
 root.geometry("500x300")
 
 
-
 # Info Labels
 floor_label = tk.Label(root, text=f"Floor: {floor}")
-floor_label.pack()
+floor_label.pack(padx = 1, pady = 1)
 
 hero_label = tk.Label(root, text=f"{hero.name} HP: {hero.health}")
-hero_label.pack()
+hero_label.pack(padx = 1, pady = 1)
 
 enemy_label = tk.Label(root, text=f"{enemy.name} Enemy HP: {enemy.health}")
-enemy_label.pack()
+enemy_label.pack(padx = 1, pady = 1)
 
 output_label = tk.Label(root, text = "")
-output_label.pack()
+output_label.pack(expand = True, fill = "both", padx = 1, pady = 1)
 
 
 output_label.config(text = "The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except\n"
