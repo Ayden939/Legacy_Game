@@ -16,6 +16,7 @@ import database
 import random
 from equipment import Sword, Shield
 from loot import loot_drop
+from PIL import Image, ImageTk
 
 # Game objects
 hero = Character("Lady Samantha Rostnovak", 1)
@@ -28,24 +29,44 @@ root = tk.Tk()      # This creates the window, and root.title just applies the t
 root.title("Legacy Game")
 root.geometry("500x300")
 
+bg_img = Image.open("images/dungeon.png")
+canvas = tk.Canvas(root, width = 500, height = 300)
+canvas.pack(fill="both", expand=True)
+bg_photo = ImageTk.PhotoImage(bg_img)
+bg_id = canvas.create_image(0, 0, anchor="nw", image=bg_photo)
 
 # Info Labels
-floor_label = tk.Label(root, text=f"Floor: {floor}")
-floor_label.pack(padx = 1, pady = 1)
+floor_label = tk.Label(root, text=f"Floor: {floor}", bg="#000000", fg="white")
+canvas.create_window(50, 30, anchor="nw", window=floor_label)
 
-hero_label = tk.Label(root, text=f"{hero.name} HP: {hero.health}")
-hero_label.pack(padx = 1, pady = 1)
+hero_label = tk.Label(root, text=f"{hero.name} HP: {hero.health}", bg="#000000", fg="white")
+canvas.create_window(50, 60, anchor="nw", window=hero_label)
 
-enemy_label = tk.Label(root, text=f"{enemy.name} Enemy HP: {enemy.health}")
-enemy_label.pack(padx = 1, pady = 1)
+enemy_label = tk.Label(root, text=f"{enemy.name} HP: {enemy.health}", bg="#000000", fg="white")
+canvas.create_window(50, 90, anchor="nw", window=enemy_label)
 
-output_label = tk.Label(root, text = "")
-output_label.pack(expand = True, fill = "both", padx = 1, pady = 1)
+output_label = tk.Label(root, text="", bg="#000000", fg="white")
+canvas.create_window(50, 150, anchor="nw", window=output_label)
+
 
 
 output_label.config(text = "The towns greatest hero, Lady Samantha Rostnovak, enters the dungeon. Little is known about the dungeon except\n"
 "that it has been around long before any person had settled there. Many have dove in to explore the depths, but most have fallen,\n"
 "and none have gone very far. There are a hundreed floors, and a long adventure for our courageous hero.")
+
+
+def resize_background(event):
+    new_width = event.width
+    new_height = event.height
+    resized = bg_img.resize((new_width, new_height), Image.LANCZOS)
+    new_bg = ImageTk.PhotoImage(resized)
+    
+    canvas.itemconfig(bg_id, image=new_bg)
+    
+    canvas.bg_ref = new_bg  
+
+root.bind("<Configure>", resize_background)
+
 
 def attack():
     damage = hero.attack(enemy)
@@ -137,17 +158,19 @@ def enable_actions():
     retreat_btn.pack()
 
 attack_btn = tk.Button(root, text = "Attack", command = attack)
-attack_btn.pack()
+canvas.create_window(50, 220, anchor="nw", window=attack_btn)
+
 heal_btn = tk.Button(root, text = "Heal", command = heal)
-heal_btn.pack()
+canvas.create_window(50, 240, anchor="nw", window=heal_btn)
+
 retreat_btn = tk.Button(root, text = "Retreat", command = retreat)
-retreat_btn.pack()
+canvas.create_window(50, 260, anchor="nw", window=retreat_btn)
 
 # This will create a pop-up for equipping items
 equip_screen = tk.Frame(root)
 yes_btn = tk.Button(equip_screen, text = "Yes")
 yes_btn.pack(side="left")
-no_btn = tk.Button(equip_screen, text = "N0")
+no_btn = tk.Button(equip_screen, text = "No")
 no_btn.pack(side="right")
 equip_screen.pack_forget()
 
